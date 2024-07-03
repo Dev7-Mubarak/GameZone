@@ -1,0 +1,52 @@
+﻿@model GameZone.Models.Room
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_DoashBoardLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Room</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfPepleAllowed" class="control-label"></label>
+                <input asp-for="NumberOfPepleAllowed" class="form-control" />
+                <span asp-validation-for="NumberOfPepleAllowed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriceInHour" class="control-label"></label>
+                <input asp-for="PriceInHour" class="form-control" />
+                <span asp-validation-for="PriceInHour" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Space" class="control-label"></label>
+                <input asp-for="Space" class="form-control" />
+                <span asp-validation-for="Space" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rest.Name" class="control-label"></label>
+                <input asp-for="Rest.Name" class="form-control" disabled />
+            </div>
+            <input asp-for="RestId" type="hidden" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

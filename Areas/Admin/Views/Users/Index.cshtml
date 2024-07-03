@@ -1,0 +1,33 @@
+﻿@model IEnumerable<GameZone.Models.ViewModels.UserViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_DoashBoardLayout.cshtml";
+}
+
+<a asp-area="Identity" asp-page="/Account/Register" class="btn btn-success my-3">Create New User</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr class="text-dark">
+            <th>User Name</th>
+            <th>Emile</th>
+            <th>Roels</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr class="text-dark">
+                <td>@user.UsreName</td>
+                <td>@user.Email</td>
+                <td>@string.Join(" , ", user.Roles.ToList())</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Users" asp-action="AddRoles" asp-route-userId="@user.Id">Edit</a>
+                    <a class="btn btn-danger" asp-controller="Users" asp-action="Delete" asp-route-userId="@user.Id" onclick="return confirm('Are You Sure From Deleted... ?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

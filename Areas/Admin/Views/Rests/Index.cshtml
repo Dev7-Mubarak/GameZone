@@ -1,0 +1,85 @@
+﻿@model IEnumerable<GameZone.Models.Rest>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DoashBoardLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Devices)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Addrees)
+            </th> 
+            <th>
+               <span>Rooms Count</span>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Owner.FullName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var rest in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelrest => rest.Name)
+            </td>
+            <td>
+                <img src="@($"{FileSetings.ImagesPath}/{rest.Image}")" alt="@rest.Name" class="rounded-circle" style="max-width: 60px; max-height: 80px" />
+            </td>
+            <td>
+                @{
+                    foreach (var device in rest.Devices)
+                    {
+                         @device.Device.Name <br />
+                    }
+
+                    <a asp-action="AddGameToRest" asp-route-id="@rest.Id">Add Games</a>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelrest => rest.Addrees)
+            </td>
+            <td>
+                @rest.Rooms.Count()
+                <br>
+                <a asp-action="Create" asp-controller="Rooms" asp-route-id="@rest.Id">Add Room</a>
+                <br>
+                 <a asp-action="Details" asp-controller="Rooms" asp-route-id="@rest.Id">Details</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelrest => rest.Owner.UserName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@rest.Id" class="btn btn-warning">Edit</a> 
+                <a asp-action="Details" asp-route-id="@rest.Id" class="btn btn-info">Details</a> 
+                <a asp-action="Delete" asp-route-id="@rest.Id" class="btn btn-danger">Delete</a> 
+                @if (rest.Owner == null)
+                {
+                      <a asp-area="Identity" asp-page="/Account/Register" asp-route-id="@rest.Id">Add Owner</a>
+                }
+                else
+                {
+                      <a asp-area="Identity" asp-page="/Account/Manage/Index" asp-route-id="@rest.Owner.Id">Edit Owner Information</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

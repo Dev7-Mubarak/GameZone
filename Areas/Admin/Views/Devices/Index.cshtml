@@ -1,0 +1,27 @@
+﻿@model GameZone.Areas.Admin.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DoashBoardLayout.cshtml";
+}
+
+<h1>Index</h1>
+<form asp-controller="Home" asp-area="Admin" asp-action="Index" method="post">
+
+    @foreach (var ckeckbox in Model.checkBoxes)
+    {
+        <div>
+            <input type="checkbox" class="form-check-input"
+                   value="@ckeckbox.Value" name="UniquName" 
+                   id="checkbox_@ckeckbox.Value"
+                   checked="@ckeckbox.IsChecked">
+            <label class="form-check-label" for="@ckeckbox.Value">
+                @ckeckbox.Descraption
+            </label>
+        </div>
+    }
+
+    <div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
